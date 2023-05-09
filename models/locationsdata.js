@@ -23,29 +23,29 @@ const LocationsData = new mongoose.Schema({
     },
     population:{
         type: String,
-        required: true,
+        default: "none",
         enum: {
-            values: ['less density','great density',],
+            values: ["none",'less density','great density'],
             message: '{VALUE} is not a valid population'
         }
     },
     terrain:{
         type: String,
-        required: true,
+        default: "none",
         enum: { 
-            values: ['mountainous','coastal','delta'],
+            values: ["none",'mountainous','coastal','delta'],
             message: '{VALUE} is not a valid terrain'
         }
     },
     climax:{
         type: String,
-        required: true,
-        enum: ['hot', 'cool', 'cold']
+        default: "none",
+        enum: ["none",'hot', 'cool', 'cold']
     },
     lifestyle:{
         type: String,
-        required: true,
-        enum: ['urban', 'countryside']
+        default: "none",
+        enum: ["none",'urban', 'countryside']
     }
 })
 
