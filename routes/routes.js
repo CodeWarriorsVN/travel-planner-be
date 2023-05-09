@@ -1,7 +1,7 @@
 import express from "express";
-import fs from 'fs';
-import LocationsData from "../models/locationsdata.js";
-import data from 'hanhchinhvn/dist/tinh_tp.json' assert {type: 'json'}
+// import fs from 'fs';
+// import LocationsData from "../models/locationsdata.js";
+// import data from 'hanhchinhvn/dist/tinh_tp.json' assert {type: 'json'}
 import { getData, patchLocations, getLocationByProperty } from "../controller/controller.js";
 
 
