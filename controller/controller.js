@@ -1,4 +1,5 @@
 import LocationsData from '../models/locationsdata.js';
+import CC from 'currency-converter-lt';
 
 export const getData = (req, res) => {
     LocationsData.find().then((data) => {
@@ -103,6 +104,12 @@ export const searchLocations = async(req, res) => {
             sortBy[sort[0]] = "asc";
         }
 
+        // if (search === ""){
+        //     const data = await LocationsData.find()
+        //     console.log('Search done');
+        //     res.send(data);
+        // }
+
         const data = await LocationsData.find({name: {$regex: search, $options: "i"}})
         .where("population").in([...populationOptions])
         .where("climax").in([...climaxOptions])
@@ -131,10 +138,34 @@ export const searchLocations = async(req, res) => {
             lifestyle: lifestyleOptions,
             data
         }
+        console.log("Search done")
         res.status(200).send(response)
     }
     catch (err) {
         console.log(err)
         res.status(500).json({error: true, message: "Internal Server Error"})
+    }
+}
+
+export const currenciesConverter = async (req, res) => {
+    try {
+        let fromCurrency = req.query.from;
+
+        let toCurrency = req.query.to;
+
+        let amountToConvert = parseFloat(req.query.amount);
+
+        let converter = new CC({
+            from: fromCurrency,
+            to: toCurrency,
+            amountToConvert,
+        });
+
+        const convertedValue = converter.convert()
+        console.log({message: "Converted"})
+        res.status(200).send({message: `${amountToConvert} ${fromCurrency} = ${convertedValue} ${toCurrency}`})
+    }
+    catch (err) {
+        res.status(500).send({message: err.message || "Internal Server Error"})
     }
 }
