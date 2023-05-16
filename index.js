@@ -13,6 +13,8 @@ dotenv.config()
 
 mongoose.connect(process.env.DATABASE_ACCESS)
 
+app.get('/hello', (req, res) => { res.send("Hello")});
+
 app.use(express.json());
 
 app.use(bodyParser.json());
