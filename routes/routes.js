@@ -2,7 +2,7 @@ import express from "express";
 // import fs from 'fs';
 import LocationsData from "../models/locationsdata.js";
 import data from 'hanhchinhvn/dist/tinh_tp.json' assert {type: 'json'}
-import { getData, patchLocations, getLocationByProperty, getLocationProperties } from "../controller/controller.js";
+import { getData, patchLocations, getLocationByProperty, getLocationProperties, searchLocations } from "../controller/controller.js";
 
 
 const router = express.Router();
@@ -34,5 +34,7 @@ router.get('/locations', getLocationByProperty);
 router.patch('/:id', patchLocations);
 
 router.get('/properties', getLocationProperties);
+
+router.get('/lookup', searchLocations);
 
 export default router
